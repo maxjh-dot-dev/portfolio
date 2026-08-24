@@ -1,10 +1,11 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /**
  * SpotlightGrid
  * A faint dot grid that only lights up around the cursor.
- * Drop it once near the root of your page; it renders a fixed, full-screen
- * layer behind your content (pointer-events: none, so it never blocks clicks).
+ * Renders ONLY on devices with a real mouse (hover + fine pointer) and when
+ * the user hasn't asked for reduced motion — so it never shows up as a static
+ * green cloud on phones/tablets.
  *
  * Props:
  *   color   – dot color (default your accent green)
@@ -21,14 +22,25 @@ export default function SpotlightGrid({
   zIndex = 0,
 }) {
   const ref = useRef(null);
+  const [enabled, setEnabled] = useState(false);
+
+  // Enable only for a mouse-driven, motion-OK device. Re-checks on change
+  // (e.g. plugging in a mouse, or toggling reduced motion).
+  useEffect(() => {
+    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setEnabled(canHover.matches && !reduce.matches);
+    update();
+    canHover.addEventListener("change", update);
+    reduce.addEventListener("change", update);
+    return () => {
+      canHover.removeEventListener("change", update);
+      reduce.removeEventListener("change", update);
+    };
+  }, []);
 
   useEffect(() => {
-    // Respect users who prefer less motion: show nothing.
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced) return;
-
+    if (!enabled) return;
     const el = ref.current;
     if (!el) return;
 
@@ -52,7 +64,10 @@ export default function SpotlightGrid({
       window.removeEventListener("pointermove", onMove);
       cancelAnimationFrame(raf);
     };
-  }, [radius]);
+  }, [enabled, radius]);
+
+  // Nothing rendered on touch devices / reduced-motion — no static green cloud.
+  if (!enabled) return null;
 
   return (
     <div
