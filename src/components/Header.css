@@ -1,0 +1,36 @@
+.status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  color: var(--faint);
+  margin-bottom: 60px;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent); /* the glow */
+  flex: none;
+  animation: status-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes status-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 6px var(--accent);
+  }
+  50% {
+    box-shadow: 0 0 13px var(--accent);
+  }
+}
+
+/* respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .status-dot {
+    animation: none;
+  }
+}

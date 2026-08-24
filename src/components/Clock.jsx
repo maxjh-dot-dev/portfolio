@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
 
-export default function Clock() 
-{
-    const [now, setNow] = useState(new Date());
+export default function Clock() {
+  const [now, setNow] = useState(new Date());
 
   useEffect(() => {
     const timer = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
 
-    const formattedDate = now.toLocaleDateString(undefined, {
+  const formattedDate = now.toLocaleDateString(undefined, {
     weekday: "long",
     year: "numeric",
     month: "long",
@@ -22,12 +21,11 @@ export default function Clock()
     second: "2-digit",
   });
 
-  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
   return (
-    <div>
-      <p>{formattedDate}</p>
-      <p>{formattedTime}</p>
-    </div>
+    <span className="clock">
+      <span>{formattedDate}</span>
+      <span>·</span>
+      <span>{formattedTime}</span>
+    </span>
   );
 }
