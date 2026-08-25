@@ -78,7 +78,7 @@ export default function Projects() {
             target="_blank"
             rel="noreferrer"
           >
-            Code →
+            Code
           </a>
         </div>
       </article>
