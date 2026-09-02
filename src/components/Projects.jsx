@@ -21,7 +21,7 @@ export default function Projects() {
         <div className="actions">
           <a
             className="btn btn-code"
-            href="https://github.com/tastefulblues/codebase-qa"
+            href="https://github.com/maxjh-dot-dev/codebase-qa"
             target="_blank"
             rel="noreferrer"
           >
@@ -48,7 +48,7 @@ export default function Projects() {
         <div className="actions">
           <a
             className="btn btn-code"
-            href="https://github.com/tastefulblues/hn-sentiment"
+            href="https://github.com/maxjh-dot-dev/hn-sentiment"
             target="_blank"
             rel="noreferrer"
           >
@@ -74,7 +74,7 @@ export default function Projects() {
         <div className="actions">
           <a
             className="btn btn-code"
-            href="https://github.com/tastefulblues/bitcoin_price"
+            href="https://github.com/maxjh-dot-dev/bitcoin_price"
             target="_blank"
             rel="noreferrer"
           >
