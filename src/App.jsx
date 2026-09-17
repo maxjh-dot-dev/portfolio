@@ -29,7 +29,7 @@ function App() {
           <Typewriter
             className="role-accent"
             caretColor="#b6f36b"
-            phrases={["full-stack apps", "ML tools", "things that work"]}
+            phrases={["full-stack apps", "things that work"]}
           />
         </p>
 
